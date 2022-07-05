@@ -2,7 +2,8 @@ package com.server.server.controllers;
 
 import com.server.server.dto.PlayerDTO;
 import com.server.server.facade.PlayerFacade;
-import com.server.server.models.Playe;
+import com.server.server.models.Player;
+import com.server.server.repository.ClubRepository;
 import com.server.server.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,28 +19,17 @@ public class PlayerController {
     private PlayerFacade playerFacade;
     @Autowired
     private PlayerRepository playerRepository;
-    private final Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres","postgres","ibrazi10-");
-    private final Statement statement = con.createStatement();
-    public PlayerController() throws SQLException {
+    @Autowired
+    private ClubRepository clubRepository;
+
+    public PlayerController() {
     }
 
     @GetMapping("/player/all/{id}")
     public Iterable<PlayerDTO> getAllClub(@PathVariable(value ="id") long id) throws SQLException {
-        ArrayList<Playe> playersList = new ArrayList<>();
-        ResultSet result = statement.executeQuery("SELECT * FROM player where club_id="+id);
-        while (result.next()){
-            Playe player = new Playe();
-            player.setId(result.getLong("id"));
-            player.setPlayerName(result.getString("player_name"));
-            player.setPlayerSurname(result.getString("player_surname"));
-            player.setPlayerGames(result.getInt("player_games"));
-            player.setPlayerGoals(result.getInt("player_goals"));
-            player.setPlayerPosition(result.getString("player_position"));
-            player.setClubId(result.getInt("club_id"));
-            playersList.add(player);
-        }
+        ArrayList<Player> playersList = (ArrayList<Player>) playerRepository.findPlayersByClub(clubRepository.findById(id));
         List<PlayerDTO> playersListDTO = playersList.stream().map(playerFacade::playerToPlayerDTO)
-                .sorted(Collections.reverseOrder(Comparator.comparingInt(PlayerDTO::getPlayer_goals)))
+                .sorted(Collections.reverseOrder(Comparator.comparingInt(PlayerDTO::getGoals)))
                 .collect(Collectors.toList());
         return playersListDTO;
     }
@@ -51,32 +41,32 @@ public class PlayerController {
 
     @PostMapping("/player/delete/{id}")
     public void playerDelete(@PathVariable(value ="id") long id){
-        Playe deletePlaye = playerRepository.findById(id).orElseThrow();
-        playerRepository.delete(deletePlaye);
+        Player deletePlayer = playerRepository.findById(id).orElseThrow();
+        playerRepository.delete(deletePlayer);
     }
 
     @PostMapping("/player/add")
     public void blogPostAdd(@RequestBody PlayerDTO playerDTO){
-        Playe newPlayer = new Playe(
-                playerDTO.getPlayer_name(),
-                playerDTO.getPlayer_surname(),
-                playerDTO.getPlayer_games(),
-                playerDTO.getPlayer_goals(),
-                playerDTO.getClub_id(),
-                playerDTO.getPlayer_position()
+        Player newPlayer = new Player(
+                playerDTO.getName(),
+                playerDTO.getSurname(),
+                playerDTO.getGames(),
+                playerDTO.getGoals(),
+                playerDTO.getClub(),
+                playerDTO.getPosition()
         );
         playerRepository.save(newPlayer);
     }
 
     @PostMapping("/player/update")
     public void updatePlayer(@RequestBody PlayerDTO playerDTO){
-        Playe updatePlayer = playerRepository.findById(playerDTO.getId()).orElseThrow();
-        updatePlayer.setPlayerName(playerDTO.getPlayer_name());
-        updatePlayer.setPlayerSurname(playerDTO.getPlayer_surname());
-        updatePlayer.setPlayerGames(playerDTO.getPlayer_games());
-        updatePlayer.setPlayerGoals(playerDTO.getPlayer_goals());
-        updatePlayer.setPlayerPosition(playerDTO.getPlayer_position());
-        updatePlayer.setClubId(playerDTO.getClub_id());
+        Player updatePlayer = playerRepository.findById(playerDTO.getId()).orElseThrow();
+        updatePlayer.setName(playerDTO.getName());
+        updatePlayer.setSurname(playerDTO.getSurname());
+        updatePlayer.setGames(playerDTO.getGames());
+        updatePlayer.setGoals(playerDTO.getGoals());
+        updatePlayer.setPosition(playerDTO.getPosition());
+        updatePlayer.setClub(playerDTO.getClub());
         playerRepository.save(updatePlayer);
     }
 }

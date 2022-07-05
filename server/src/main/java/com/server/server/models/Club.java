@@ -21,15 +21,15 @@ public class Club {
     private Integer points;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "club", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, orphanRemoval = true)
     private Collection<Player> players;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "club1", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "club1", fetch = FetchType.LAZY, orphanRemoval = true)
     private Collection<Match> matches_first;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "club2", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "club2", fetch = FetchType.LAZY, orphanRemoval = true)
     private Collection<Match> matches_second;
 
     public Club(){}
@@ -49,35 +49,35 @@ public class Club {
         this.id = id;
     }
 
-    public String getClubName() {
+    public String getName() {
         return name;
     }
 
-    public void setClubName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getClubGames() {
+    public Integer getGames() {
         return games;
     }
 
-    public void setClubGames(Integer games) {
+    public void setGames(Integer games) {
         this.games = games;
     }
 
-    public Integer getClubGoals() {
+    public Integer getGoals() {
         return goals;
     }
 
-    public void setClubGoals(Integer goals) {
+    public void setGoals(Integer goals) {
         this.goals = goals;
     }
 
-    public Integer getClubPoints() {
+    public Integer getPoints() {
         return points;
     }
 
-    public void setClubPoints(Integer points) {
+    public void setPoints(Integer points) {
         this.points = points;
     }
 

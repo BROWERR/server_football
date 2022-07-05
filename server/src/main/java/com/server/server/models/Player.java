@@ -30,20 +30,20 @@ public class Player {
 
     public Player(String name, String surname,
                   Integer games, Integer goals,
-                  Long club_id, String position) {
+                   Club club, String position) {
         this.name = name;
         this.surname = surname;
         this.games = games;
         this.goals = goals;
-        this.club.setId(club_id);
+        this.club = club;
         this.position = position;
     }
 
-    public String getPlayerPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPlayerPosition(String player_position) {
+    public void setPosition(String player_position) {
         this.position = player_position;
     }
 
@@ -55,35 +55,35 @@ public class Player {
         this.id = id;
     }
 
-    public String getPlayerName() {
+    public String getName() {
         return name;
     }
 
-    public void setPlayerName(String player_name) {
+    public void setName(String player_name) {
         this.name = player_name;
     }
 
-    public String getPlayerSurname() {
+    public String getSurname() {
         return surname;
     }
 
-    public void setPlayerSurname(String player_surname) {
+    public void setSurname(String player_surname) {
         this.surname = player_surname;
     }
 
-    public Integer getPlayerGames() {
+    public Integer getGames() {
         return games;
     }
 
-    public void setPlayerGames(Integer player_games) {
+    public void setGames(Integer player_games) {
         this.games = player_games;
     }
 
-    public Integer getPlayerGoals() {
+    public Integer getGoals() {
         return goals;
     }
 
-    public void setPlayerGoals(Integer player_goals) {
+    public void setGoals(Integer player_goals) {
         this.goals = player_goals;
     }
 

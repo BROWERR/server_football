@@ -23,12 +23,12 @@ public class Match {
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_first_club", referencedColumnName = "ID")
+    @JoinColumn(name = "id_first_club")
     private Club club1;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_second_club", referencedColumnName = "ID")
+    @JoinColumn(name = "id_second_club")
     private Club club2;
 
     public Match(){
