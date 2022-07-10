@@ -1,9 +1,14 @@
 package com.server.server.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.Collection;
 
 @Entity
@@ -11,7 +16,7 @@ public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @Column(unique = true)
     private String name;
 
     private Integer games;
@@ -22,6 +27,7 @@ public class Club {
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonIgnoreProperties("club")
     private Collection<Player> players;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -80,11 +86,11 @@ public class Club {
     public void setPoints(Integer points) {
         this.points = points;
     }
-
+    @JsonIgnore
     public Collection<Player> getPlayers() {
         return players;
     }
-
+    @JsonIgnore
     public void setPlayers(Collection<Player> players) {
         this.players = players;
     }

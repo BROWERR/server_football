@@ -11,5 +11,5 @@ public class PlayerDTO {
     private String position;
     private Integer games;
     private Integer goals;
-    private Club club;
+    private Long club_id;
 }

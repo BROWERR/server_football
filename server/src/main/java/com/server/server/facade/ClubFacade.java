@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ClubFacade {
-
     public ClubDTO clubToClubDTO(Club clu){
         ClubDTO clubDTO = new ClubDTO();
         clubDTO.setId(clu.getId());

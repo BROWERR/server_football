@@ -23,7 +23,7 @@ public class ClubController {
     @Autowired
     private ClubRepository clubRepository;
 
-    public ClubController() throws SQLException {
+    public ClubController() {
     }
 
     @GetMapping("/club/all")

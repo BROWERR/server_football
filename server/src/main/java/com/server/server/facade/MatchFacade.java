@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MatchFacade {
-    public MatchDTO mathToMatchDTO(Match match){
+    public MatchDTO matchToMatchDTO(Match match){
         MatchDTO matchDTO = new MatchDTO();
-        matchDTO.setId(matchDTO.getId());
-        matchDTO.setDate(matchDTO.getDate());
-        matchDTO.setGoals_first(matchDTO.getGoals_first());
-        matchDTO.setGoals_second(matchDTO.getGoals_second());
+        matchDTO.setId(match.getId());
+        matchDTO.setDate(match.getDate());
+        matchDTO.setGoals_first(match.getGoals_first());
+        matchDTO.setGoals_second(match.getGoals_second());
         matchDTO.setClub1(match.getClub1());
         matchDTO.setClub2(match.getClub2());
         return matchDTO;

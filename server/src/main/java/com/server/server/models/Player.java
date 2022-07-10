@@ -1,5 +1,9 @@
 package com.server.server.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -24,6 +28,7 @@ public class Player {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "club_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Club club;
 
     public Player(){}

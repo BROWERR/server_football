@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PlayerFacade {
-
     public PlayerDTO playerToPlayerDTO(Player player){
         PlayerDTO playerDTO = new PlayerDTO();
         playerDTO.setId(player.getId());
@@ -15,7 +14,7 @@ public class PlayerFacade {
         playerDTO.setPosition(player.getPosition());
         playerDTO.setGames(player.getGames());
         playerDTO.setGoals(player.getGoals());
-        playerDTO.setClub(player.getClub());
+        playerDTO.setClub_id(player.getClub().getId());
         return playerDTO;
     }
 }

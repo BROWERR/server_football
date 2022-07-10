@@ -42,17 +42,18 @@ public class PlayerController {
     @PostMapping("/player/delete/{id}")
     public void playerDelete(@PathVariable(value ="id") long id){
         Player deletePlayer = playerRepository.findById(id).orElseThrow();
+        deletePlayer.setClub(null);
         playerRepository.delete(deletePlayer);
     }
 
     @PostMapping("/player/add")
-    public void blogPostAdd(@RequestBody PlayerDTO playerDTO){
+    public void PlayerAdd(@RequestBody PlayerDTO playerDTO){
         Player newPlayer = new Player(
                 playerDTO.getName(),
                 playerDTO.getSurname(),
                 playerDTO.getGames(),
                 playerDTO.getGoals(),
-                playerDTO.getClub(),
+                clubRepository.findById(playerDTO.getClub_id()).orElseThrow(),
                 playerDTO.getPosition()
         );
         playerRepository.save(newPlayer);
@@ -66,7 +67,7 @@ public class PlayerController {
         updatePlayer.setGames(playerDTO.getGames());
         updatePlayer.setGoals(playerDTO.getGoals());
         updatePlayer.setPosition(playerDTO.getPosition());
-        updatePlayer.setClub(playerDTO.getClub());
+        updatePlayer.setClub(clubRepository.findById(playerDTO.getClub_id()).orElseThrow());
         playerRepository.save(updatePlayer);
     }
 }
