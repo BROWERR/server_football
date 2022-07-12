@@ -22,11 +22,8 @@ public class PlayerController {
     @Autowired
     private ClubRepository clubRepository;
 
-    public PlayerController() {
-    }
-
     @GetMapping("/player/all/{id}")
-    public Iterable<PlayerDTO> getAllClub(@PathVariable(value ="id") long id) throws SQLException {
+    public Iterable<PlayerDTO> getAllClub(@PathVariable(value ="id") long id){
         ArrayList<Player> playersList = (ArrayList<Player>) playerRepository.findPlayersByClub(clubRepository.findById(id));
         List<PlayerDTO> playersListDTO = playersList.stream().map(playerFacade::playerToPlayerDTO)
                 .sorted(Collections.reverseOrder(Comparator.comparingInt(PlayerDTO::getGoals)))

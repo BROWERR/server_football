@@ -17,8 +17,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private ClubRepository clubRepository;
 
     @GetMapping("api/user/{id}")
     public User getUserById(@PathVariable(value="id") long id){

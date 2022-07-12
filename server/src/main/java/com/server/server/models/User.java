@@ -1,5 +1,6 @@
 package com.server.server.models;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -7,7 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
+@Data
 @Entity
 @Table(name = "userman")
 public class User implements UserDetails {
@@ -34,26 +35,6 @@ public class User implements UserDetails {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.role = role;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setPassword(String password){
-        this.password=password;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
         this.role = role;
     }
 

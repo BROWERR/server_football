@@ -1,5 +1,6 @@
 package com.server.server.models;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -7,8 +8,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Collection;
-@Getter
-@Setter
+
+@Data
 @Entity
 public class Match {
     @Id
@@ -43,13 +44,4 @@ public class Match {
         this.club1 = club1;
         this.club2 = club2;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }

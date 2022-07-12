@@ -4,7 +4,6 @@ import com.server.server.exceptions.UserExistException;
 import com.server.server.models.User;
 import com.server.server.payload.request.SignupRequest;
 import com.server.server.repository.UserRepository;
-import com.server.server.security.JWTTokenProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
