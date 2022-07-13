@@ -1,7 +1,7 @@
 package com.server.server.services;
 
+import com.server.server.Mapper.MatchMapper;
 import com.server.server.dto.MatchDTO;
-import com.server.server.facade.MatchFacade;
 import com.server.server.models.Match;
 import com.server.server.repository.ClubRepository;
 import com.server.server.repository.MatchRepository;
@@ -18,7 +18,8 @@ public class MatchService {
     @Autowired
     private ClubRepository clubRepository;
     @Autowired
-    private MatchFacade matchFacade;
+    private MatchMapper matchMapper;
+
     public void deleteMatchById(Long id){
         Match deleteMatch = matchRepository.findById(id).orElseThrow();
         deleteMatch.setClub1(null);
@@ -28,9 +29,8 @@ public class MatchService {
 
     public List<MatchDTO> getAllMatches(){
         List<Match> matches =(List<Match>) matchRepository.findAll();
-        List<MatchDTO> matchesDTO = matches.stream().map(matchFacade::matchToMatchDTO)
+        return matches.stream().map(matchMapper::toMatchDTO)
                 .collect(Collectors.toList());
-        return matchesDTO;
     }
 
     public void addMatch(MatchDTO matchDTO){

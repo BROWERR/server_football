@@ -1,7 +1,6 @@
 package com.server.server.dto;
 
 import com.server.server.models.Club;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

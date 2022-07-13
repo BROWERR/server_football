@@ -1,7 +1,6 @@
 package com.server.server.controllers;
 
 import com.server.server.models.User;
-import com.server.server.repository.ClubRepository;
 import com.server.server.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
